@@ -33,3 +33,4 @@ bin/
 # Application
 *.log
 application-local.properties
+src/main/resources/application.properties

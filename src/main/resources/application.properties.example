@@ -5,8 +5,8 @@ server.port=8080
 spring.thymeleaf.mode=HTML
 spring.thymeleaf.cache=false
 
-# Gemini API (embeddings only)
+# Gemini API (embeddings only) - get key at aistudio.google.com/apikey
 gemini.api.key=YOUR_GEMINI_API_KEY_HERE
 
-# Groq API (chat)
+# Groq API (chat) - get key at console.groq.com/keys
 groq.api.key=YOUR_GROQ_API_KEY_HERE
