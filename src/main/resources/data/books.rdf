@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rdf:RDF
+    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+    xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+    xmlns:ex="http://example.org/book-recommendation/">
+
+    <rdf:Description rdf:about="http://example.org/book-recommendation/user/alice">
+        <rdf:type rdf:resource="http://example.org/book-recommendation/User"/>
+        <ex:name>Alice</ex:name>
+        <ex:readingLevel>Intermediate</ex:readingLevel>
+        <ex:preferredTheme rdf:resource="http://example.org/book-recommendation/theme/science-fiction"/>
+    </rdf:Description>
+
+    <rdf:Description rdf:about="http://example.org/book-recommendation/user/bob">
+        <rdf:type rdf:resource="http://example.org/book-recommendation/User"/>
+        <ex:name>Bob</ex:name>
+        <ex:readingLevel>Beginner</ex:readingLevel>
+        <ex:preferredTheme rdf:resource="http://example.org/book-recommendation/theme/mystery"/>
+    </rdf:Description>
+
+    <rdf:Description rdf:about="http://example.org/book-recommendation/book/dune">
+        <rdf:type rdf:resource="http://example.org/book-recommendation/Book"/>
+        <ex:title>Dune</ex:title>
+        <ex:author>Frank Herbert</ex:author>
+        <ex:genre rdf:resource="http://example.org/book-recommendation/theme/science-fiction"/>
+        <ex:genre rdf:resource="http://example.org/book-recommendation/theme/fantasy"/>
+        <ex:readingLevel>Advanced</ex:readingLevel>
+        <ex:description>A Science Fiction and Fantasy novel</ex:description>
+    </rdf:Description>
+
+    <rdf:Description rdf:about="http://example.org/book-recommendation/book/the-silent-patient">
+        <rdf:type rdf:resource="http://example.org/book-recommendation/Book"/>
+        <ex:title>The Silent Patient</ex:title>
+        <ex:author>Alex Michaelides</ex:author>
+        <ex:genre rdf:resource="http://example.org/book-recommendation/theme/mystery"/>
+        <ex:genre rdf:resource="http://example.org/book-recommendation/theme/murder"/>
+        <ex:readingLevel>Intermediate</ex:readingLevel>
+        <ex:description>A Mystery and Murder novel</ex:description>
+    </rdf:Description>
+
+    <rdf:Description rdf:about="http://example.org/book-recommendation/book/hunger-games">
+        <rdf:type rdf:resource="http://example.org/book-recommendation/Book"/>
+        <ex:title>Hunger Games</ex:title>
+        <ex:author>Suzanne Collins</ex:author>
+        <ex:genre rdf:resource="http://example.org/book-recommendation/theme/science-fiction"/>
+        <ex:genre rdf:resource="http://example.org/book-recommendation/theme/fantasy"/>
+        <ex:readingLevel>Beginner</ex:readingLevel>
+        <ex:description>A Science Fiction and Fantasy novel for Beginner readers</ex:description>
+    </rdf:Description>
+
+    <rdf:Description rdf:about="http://example.org/book-recommendation/theme/science-fiction">
+        <rdf:type rdf:resource="http://example.org/book-recommendation/Theme"/>
+        <ex:name>Science Fiction</ex:name>
+    </rdf:Description>
+
+    <rdf:Description rdf:about="http://example.org/book-recommendation/theme/fantasy">
+        <rdf:type rdf:resource="http://example.org/book-recommendation/Theme"/>
+        <ex:name>Fantasy</ex:name>
+    </rdf:Description>
+
+    <rdf:Description rdf:about="http://example.org/book-recommendation/theme/mystery">
+        <rdf:type rdf:resource="http://example.org/book-recommendation/Theme"/>
+        <ex:name>Mystery</ex:name>
+    </rdf:Description>
+
+    <rdf:Description rdf:about="http://example.org/book-recommendation/theme/murder">
+        <rdf:type rdf:resource="http://example.org/book-recommendation/Theme"/>
+        <ex:name>Murder</ex:name>
+    </rdf:Description>
+
+    <rdf:Description rdf:about="http://example.org/book-recommendation/recommendation/alice-silent-patient">
+        <rdf:type rdf:resource="http://example.org/book-recommendation/Recommendation"/>
+        <ex:user rdf:resource="http://example.org/book-recommendation/user/alice"/>
+        <ex:book rdf:resource="http://example.org/book-recommendation/book/the-silent-patient"/>
+        <ex:reason>The Silent Patient matches Alice's preferred theme (Mystery) and reading level (Intermediate)</ex:reason>
+        <ex:isRecommended>true</ex:isRecommended>
+    </rdf:Description>
+
+    <rdf:Description rdf:about="http://example.org/book-recommendation/recommendation/bob-dune">
+        <rdf:type rdf:resource="http://example.org/book-recommendation/Recommendation"/>
+        <ex:user rdf:resource="http://example.org/book-recommendation/user/bob"/>
+        <ex:book rdf:resource="http://example.org/book-recommendation/book/dune"/>
+        <ex:reason>Dune's reading level (Advanced) is above Bob's reading level (Beginner), so not recommended</ex:reason>
+        <ex:isRecommended>false</ex:isRecommended>
+    </rdf:Description>
+
+    <rdf:Description rdf:about="http://example.org/book-recommendation/recommendation/bob-hunger-games">
+        <rdf:type rdf:resource="http://example.org/book-recommendation/Recommendation"/>
+        <ex:user rdf:resource="http://example.org/book-recommendation/user/bob"/>
+        <ex:book rdf:resource="http://example.org/book-recommendation/book/hunger-games"/>
+        <ex:reason>Hunger Games does not match Bob's preferred theme (Mystery), so not recommended despite correct reading level</ex:reason>
+        <ex:isRecommended>false</ex:isRecommended>
+    </rdf:Description>
+
+</rdf:RDF>
