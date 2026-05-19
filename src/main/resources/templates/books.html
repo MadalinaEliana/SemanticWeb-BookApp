@@ -3,83 +3,177 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Books - Book Recommendation System</title>
+    <title>Books – Book Recommendation System</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
+        :root {
+            --bg: #faf9f6;
+            --panel: #ffffff;
+            --border: #e8e3db;
+            --text: #1a1612;
+            --muted: #78736a;
+            --accent: #c0392b;
+            --accent-2: #e67e22;
+            --shadow: 0 2px 12px rgba(26,22,18,0.07);
         }
-        
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: #f5f5f5;
-            padding: 20px;
+            font-family: 'DM Sans', sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            min-height: 100vh;
         }
-        
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
+
+        .topbar {
+            background: var(--text);
+            color: #faf9f6;
+            padding: 14px 32px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
         }
-        
-        h1 {
-            color: #333;
-            margin-bottom: 30px;
+        .topbar a { color: #e8c88a; text-decoration: none; font-size: 14px; font-weight: 500; }
+        .topbar h1 { font-family: 'DM Serif Display', serif; font-size: 22px; letter-spacing: 0.01em; }
+
+        .toolbar {
+            padding: 20px 32px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            border-bottom: 1px solid var(--border);
+            background: var(--panel);
         }
-        
-        .back-link {
-            display: inline-block;
-            margin-bottom: 20px;
-            color: #667eea;
-            text-decoration: none;
+
+        .btn {
+            display: inline-flex; align-items: center; gap: 6px;
+            padding: 9px 18px; border-radius: 8px; font-size: 14px;
+            font-weight: 700; text-decoration: none; cursor: pointer;
+            border: none; transition: filter .15s;
         }
-        
-        .back-link:hover {
-            text-decoration: underline;
+        .btn:hover { filter: brightness(0.92); }
+        .btn-primary { background: var(--accent); color: #fff; }
+        .btn-secondary { background: var(--border); color: var(--text); }
+
+        .content { padding: 28px 32px; }
+
+        .error-box {
+            background: #fff0f0; border: 1px solid #f5c5c5;
+            border-radius: 10px; padding: 12px 16px;
+            color: #c0392b; margin-bottom: 20px; font-size: 14px;
         }
-        
+
+        .change-level-panel {
+            background: var(--panel); border: 1px solid var(--border);
+            border-radius: 14px; padding: 20px 24px;
+            margin-bottom: 28px; box-shadow: var(--shadow);
+        }
+        .change-level-panel h2 {
+            font-family: 'DM Serif Display', serif; font-size: 18px; margin-bottom: 14px;
+        }
+        .change-level-panel form {
+            display: flex; flex-wrap: wrap; gap: 12px; align-items: flex-end;
+        }
+        .field { display: flex; flex-direction: column; gap: 5px; }
+        .field label { font-size: 12px; font-weight: 700; color: var(--muted); text-transform: uppercase; letter-spacing: .05em; }
+        .field input, .field select {
+            padding: 8px 12px; border: 1px solid var(--border);
+            border-radius: 8px; font-size: 14px; font-family: inherit;
+            background: var(--bg); min-width: 180px;
+        }
+
         .books-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 20px;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 18px;
         }
-        
+
         .book-card {
-            background: white;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-            transition: box-shadow 0.3s;
+            background: var(--panel);
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            padding: 22px;
+            box-shadow: var(--shadow);
+            transition: transform .2s, box-shadow .2s;
+            display: flex; flex-direction: column; gap: 10px;
         }
-        
         .book-card:hover {
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 24px rgba(26,22,18,0.12);
         }
-        
+
         .book-title {
-            font-size: 18px;
-            font-weight: bold;
-            color: #333;
-            margin-bottom: 10px;
+            font-family: 'DM Serif Display', serif;
+            font-size: 19px; line-height: 1.2;
         }
-        
-        .book-info {
-            color: #666;
-            font-size: 14px;
-            margin-bottom: 5px;
+        .book-title a { color: var(--text); text-decoration: none; }
+        .book-title a:hover { color: var(--accent); }
+
+        .book-author { color: var(--muted); font-size: 13px; }
+
+        .tags { display: flex; flex-wrap: wrap; gap: 6px; }
+        .tag {
+            background: #f0ece4; color: #5a4f3e;
+            font-size: 12px; font-weight: 700;
+            padding: 3px 10px; border-radius: 20px;
+            letter-spacing: .03em;
         }
+        .tag.level { background: #fef3e2; color: #a0580a; }
+
+        .book-card-actions { display: flex; gap: 8px; margin-top: auto; }
+        .card-btn {
+            flex: 1; padding: 8px; border-radius: 8px; border: none;
+            font-size: 13px; font-weight: 700; cursor: pointer;
+            text-align: center; text-decoration: none;
+            transition: filter .15s;
+        }
+        .card-btn:hover { filter: brightness(0.9); }
+        .card-btn-view { background: var(--text); color: #fff; }
+        .card-btn-edit { background: var(--border); color: var(--text); }
+
+        .empty-state {
+            text-align: center; padding: 60px 20px; color: var(--muted);
+        }
+        .empty-state p { font-size: 16px; margin-bottom: 16px; }
     </style>
 </head>
-<body>
-    <div class="container">
-        <a href="/" class="back-link">← Back to Home</a>
-        <h1>Books</h1>
-        
-        <div class="books-grid">
-            <div class="book-card">
-                <div class="book-title">Coming Soon</div>
-                <p class="book-info">Books will be loaded from RDF data</p>
+<body data-page="list">
+    <div class="topbar">
+        <h1>📚 Book Library</h1>
+        <a href="/">← Home</a>
+    </div>
+
+    <div class="toolbar">
+        <a href="/books/edit" class="btn btn-primary">+ Add New Book</a>
+        <a href="/visualize" class="btn btn-secondary">🔍 RDF Graph</a>
+    </div>
+
+    <div class="content">
+        <div class="error-box" th:if="${errorMessage}" th:text="${errorMessage}"></div>
+
+        <div class="books-grid" th:if="${not #lists.isEmpty(books)}">
+            <div class="book-card" th:each="book : ${books}">
+                <div class="book-title">
+                    <a th:href="@{/books/{id}(id=${book.id})}" th:text="${book.title}">Title</a>
+                </div>
+                <div class="book-author" th:if="${not #strings.isEmpty(book.author)}">
+                    by <span th:text="${book.author}">Author</span>
+                </div>
+                <div class="tags">
+                    <span class="tag" th:each="genre : ${book.genres}" th:text="${genre}">Genre</span>
+                    <span class="tag level" th:if="${not #strings.isEmpty(book.readingLevel)}" th:text="${book.readingLevel}">Level</span>
+                </div>
+                <div class="book-card-actions">
+                    <a class="card-btn card-btn-view" th:href="@{/books/{id}(id=${book.id})}">View</a>
+                    <a class="card-btn card-btn-edit" th:href="@{/books/edit(id=${book.id})}">Edit</a>
+                </div>
             </div>
+        </div>
+
+        <div class="empty-state" th:if="${#lists.isEmpty(books)}">
+            <p>No books found in the RDF store.</p>
+            <a href="/books/edit" class="btn btn-primary">Add your first book</a>
         </div>
     </div>
 </body>

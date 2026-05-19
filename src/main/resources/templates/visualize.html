@@ -4,139 +4,200 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>RDF Visualization - Book Recommendation System</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=DM+Serif+Display&display=swap" rel="stylesheet">
     <style>
+        :root {
+            --bg: #faf9f6;
+            --panel: #ffffff;
+            --border: #e8e3db;
+            --text: #1a1612;
+            --accent: #c0392b;
+        }
+
         * {
+            box-sizing: border-box;
             margin: 0;
             padding: 0;
-            box-sizing: border-box;
         }
-        
+
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: #f5f5f5;
-            padding: 20px;
+            font-family: 'DM Sans', sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            min-height: 100vh;
         }
-        
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
+
+        .topbar {
+            background: var(--text);
+            color: #faf9f6;
+            padding: 14px 32px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
         }
-        
-        h1 {
-            color: #333;
-            margin-bottom: 20px;
+
+        .topbar h1 {
+            font-family: 'DM Serif Display', serif;
+            font-size: 22px;
         }
-        
-        .back-link {
-            display: inline-block;
-            margin-bottom: 20px;
-            color: #667eea;
+
+        .topbar a {
+            color: #e8c88a;
             text-decoration: none;
-        }
-        
-        .back-link:hover {
-            text-decoration: underline;
-        }
-        
-        .upload-section {
-            background: white;
-            padding: 20px;
-            border-radius: 8px;
-            margin-bottom: 20px;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-        }
-        
-        .upload-section h2 {
-            color: #333;
-            font-size: 18px;
-            margin-bottom: 15px;
-        }
-        
-        .form-group {
-            margin-bottom: 15px;
-        }
-        
-        .form-group label {
-            display: block;
-            margin-bottom: 5px;
-            color: #666;
+            font-size: 14px;
             font-weight: 500;
         }
-        
-        .form-group input {
-            width: 100%;
-            padding: 10px;
-            border: 1px solid #ddd;
-            border-radius: 4px;
-            font-size: 14px;
+
+        .content {
+            padding: 28px 32px 40px;
         }
-        
-        button {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            padding: 10px 20px;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-            font-size: 14px;
-            transition: transform 0.2s;
-        }
-        
-        button:hover {
-            transform: translateY(-2px);
-        }
-        
-        .visualization-section {
-            background: white;
+
+        .card {
+            background: var(--panel);
+            border: 1px solid var(--border);
+            border-radius: 14px;
             padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 2px 12px rgba(26,22,18,0.07);
+            margin-bottom: 18px;
         }
-        
-        .visualization-section h2 {
-            color: #333;
-            font-size: 18px;
-            margin-bottom: 15px;
+
+        .notice {
+            margin-bottom: 12px;
+            border-radius: 10px;
+            padding: 10px 14px;
+            font-size: 14px;
         }
-        
-        #graph {
+
+        .notice.success {
+            background: #eaf7ef;
+            color: #166534;
+            border: 1px solid #b7e1c1;
+        }
+
+        .notice.error {
+            background: #fff1f2;
+            color: #9f1239;
+            border: 1px solid #fecdd3;
+        }
+
+        .form-group {
+            margin-bottom: 14px;
+        }
+
+        label {
+            display: block;
+            font-size: 12px;
+            font-weight: 700;
+            color: #78736a;
+            text-transform: uppercase;
+            letter-spacing: .06em;
+            margin-bottom: 6px;
+        }
+
+        input[type="file"] {
             width: 100%;
-            height: 500px;
-            border: 1px solid #ddd;
-            border-radius: 4px;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 10px 12px;
+            background: #fff;
+        }
+
+        .button {
+            background: var(--accent);
+            color: #fff;
+            border: none;
+            border-radius: 8px;
+            padding: 10px 18px;
+            font-weight: 700;
+            cursor: pointer;
+        }
+
+        .graph-frame {
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            overflow: auto;
+            min-height: 620px;
+            background: #fff;
+        }
+
+        svg {
+            display: block;
+            min-width: 980px;
+            min-height: 640px;
+        }
+
+        .edge-line {
+            stroke: #c4b9aa;
+            stroke-width: 1.1;
+        }
+
+        .node-resource {
+            fill: #c0392b;
+            opacity: 0.88;
+        }
+
+        .node-literal {
+            fill: #f59e0b;
+            opacity: 0.88;
+        }
+
+        .node-label {
+            fill: #1a1612;
+            font-size: 11px;
+            font-weight: 700;
+            text-anchor: middle;
+        }
+
+        .edge-label {
+            fill: #7a6f62;
+            font-size: 10px;
+            text-anchor: middle;
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <a href="/" class="back-link">← Back to Home</a>
-        <h1>RDF Graph Visualization</h1>
-        
-        <div class="upload-section">
-            <h2>Upload RDF/XML File</h2>
-            <form id="uploadForm">
-                <div class="form-group">
-                    <label for="rdfFile">Select RDF/XML File:</label>
-                    <input type="file" id="rdfFile" name="file" accept=".xml,.rdf" required>
-                </div>
-                <button type="submit">Upload and Visualize</button>
-            </form>
-        </div>
-        
-        <div class="visualization-section">
-            <h2>Graph Visualization</h2>
-            <div id="graph">
-                <p style="padding: 20px; color: #999; text-align: center;">Graph will appear here after uploading an RDF file</p>
+<div class="topbar">
+    <h1>RDF Graph Visualization</h1>
+    <a href="/">← Back to Home</a>
+</div>
+
+<div class="content">
+    <div class="card">
+        <div class="notice success" th:if="${message}" th:text="${message}"></div>
+        <div class="notice error" th:if="${errorMessage}" th:text="${errorMessage}"></div>
+
+        <form method="post" action="/visualize/upload" enctype="multipart/form-data">
+            <div class="form-group">
+                <label for="rdfFile">RDF/XML file</label>
+                <input type="file" id="rdfFile" name="file" accept=".rdf,.xml" required>
             </div>
-        </div>
+            <button class="button" type="submit">Load and Visualize</button>
+        </form>
     </div>
-    
-    <script>
-        document.getElementById('uploadForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            // TODO: Implement file upload and visualization
-            alert('RDF file upload feature coming soon!');
-        });
-    </script>
+
+    <div class="graph-frame" th:if="${hasGraph}">
+        <svg xmlns="http://www.w3.org/2000/svg" width="1200" height="700" viewBox="0 0 1200 700">
+            <g th:each="edge : ${graphEdges}">
+                <line class="edge-line"
+                      th:attr="x1=${edge.sourceX},y1=${edge.sourceY},x2=${edge.targetX},y2=${edge.targetY}" />
+                <text class="edge-label"
+                      th:attr="x=${(edge.sourceX + edge.targetX) / 2},y=${(edge.sourceY + edge.targetY) / 2 - 6}"
+                      th:text="${edge.label}"></text>
+            </g>
+            <g th:each="node : ${graphNodes}">
+                <circle th:classappend="${' node-' + node.type}"
+                        th:attr="cx=${node.x},cy=${node.y},r=${node.type == 'literal' ? 24 : 30}" />
+                <text class="node-label"
+                      th:attr="x=${node.x},y=${node.y + 44}"
+                      th:text="${node.label}"></text>
+            </g>
+        </svg>
+    </div>
+
+    <div class="graph-frame" th:if="${!hasGraph}" style="display:flex;align-items:center;justify-content:center;color:#78736a;min-height:420px;">
+        Upload an RDF/XML file to display the graph.
+    </div>
+</div>
 </body>
 </html>
