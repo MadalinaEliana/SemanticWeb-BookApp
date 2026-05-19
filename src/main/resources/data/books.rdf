@@ -68,28 +68,4 @@
         <ex:name>Murder</ex:name>
     </rdf:Description>
 
-    <rdf:Description rdf:about="http://example.org/book-recommendation/recommendation/alice-silent-patient">
-        <rdf:type rdf:resource="http://example.org/book-recommendation/Recommendation"/>
-        <ex:user rdf:resource="http://example.org/book-recommendation/user/alice"/>
-        <ex:book rdf:resource="http://example.org/book-recommendation/book/the-silent-patient"/>
-        <ex:reason>The Silent Patient matches Alice's preferred theme (Mystery) and reading level (Intermediate)</ex:reason>
-        <ex:isRecommended>true</ex:isRecommended>
-    </rdf:Description>
-
-    <rdf:Description rdf:about="http://example.org/book-recommendation/recommendation/bob-dune">
-        <rdf:type rdf:resource="http://example.org/book-recommendation/Recommendation"/>
-        <ex:user rdf:resource="http://example.org/book-recommendation/user/bob"/>
-        <ex:book rdf:resource="http://example.org/book-recommendation/book/dune"/>
-        <ex:reason>Dune's reading level (Advanced) is above Bob's reading level (Beginner), so not recommended</ex:reason>
-        <ex:isRecommended>false</ex:isRecommended>
-    </rdf:Description>
-
-    <rdf:Description rdf:about="http://example.org/book-recommendation/recommendation/bob-hunger-games">
-        <rdf:type rdf:resource="http://example.org/book-recommendation/Recommendation"/>
-        <ex:user rdf:resource="http://example.org/book-recommendation/user/bob"/>
-        <ex:book rdf:resource="http://example.org/book-recommendation/book/hunger-games"/>
-        <ex:reason>Hunger Games does not match Bob's preferred theme (Mystery), so not recommended despite correct reading level</ex:reason>
-        <ex:isRecommended>false</ex:isRecommended>
-    </rdf:Description>
-
 </rdf:RDF>
