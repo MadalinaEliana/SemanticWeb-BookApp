@@ -93,6 +93,12 @@
     </style>
 </head>
 <body th:attr="data-page=${'book:' + book.id}">
+    <div id="page-context" data-page="book-detail"
+         th:data-book-title="${book.title}"
+         th:data-book-author="${book.author}"
+         th:data-book-genre="${not #lists.isEmpty(book.genres) ? #strings.listJoin(book.genres, ', ') : ''}">
+    </div>
+    <div th:replace="~{fragments/chat-widget :: chat-widget}"></div>
     <div class="topbar">
         <h1>📚 Book Detail</h1>
         <a href="/books">← All Books</a>

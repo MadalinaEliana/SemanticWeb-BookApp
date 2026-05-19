@@ -81,6 +81,8 @@
     </style>
 </head>
 <body data-page="home">
+    <div id="page-context" data-page="home"></div>
+    <div th:replace="~{fragments/chat-widget :: chat-widget}"></div>
     <div class="container">
         <div class="eyebrow">Semantic Web · Homework 2</div>
         <h1 th:text="${title}">Book Recommendation System</h1>

@@ -1,0 +1,193 @@
+@prefix : <http://www.semanticweb.org/radu/ontologies/2026/4/untitled-ontology-9/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix xml: <http://www.w3.org/XML/1998/namespace> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix ontology: <http://example.org/book-recommendation/ontology#> .
+@base <http://www.semanticweb.org/radu/ontologies/2026/4/untitled-ontology-9/> .
+
+<http://example.org/book-recommendation/ontology> rdf:type owl:Ontology .
+
+#################################################################
+#    Object Properties
+#################################################################
+
+###  http://example.org/book-recommendation/ontology#hasGenre
+ontology:hasGenre rdf:type owl:ObjectProperty ;
+                  rdfs:domain ontology:Book ;
+                  rdfs:range ontology:Themes .
+
+
+###  http://example.org/book-recommendation/ontology#hasPreferredTheme
+ontology:hasPreferredTheme rdf:type owl:ObjectProperty ;
+                           rdfs:domain ontology:User ;
+                           rdfs:range ontology:Themes .
+
+
+###  http://example.org/book-recommendation/ontology#hasReadingLevelMatch
+ontology:hasReadingLevelMatch rdf:type owl:ObjectProperty ;
+                              rdfs:domain ontology:Book ;
+                              rdfs:range ontology:User .
+
+
+###  http://example.org/book-recommendation/ontology#isRecommendedFor
+ontology:isRecommendedFor rdf:type owl:ObjectProperty ;
+                          rdfs:domain ontology:Book ;
+                          rdfs:range ontology:User .
+
+
+#################################################################
+#    Data properties
+#################################################################
+
+###  http://example.org/book-recommendation/ontology#hasAuthor
+ontology:hasAuthor rdf:type owl:DatatypeProperty ;
+                   rdfs:domain ontology:Book ;
+                   rdfs:range xsd:string .
+
+
+###  http://example.org/book-recommendation/ontology#hasDescription
+ontology:hasDescription rdf:type owl:DatatypeProperty ;
+                        rdfs:domain ontology:Book ;
+                        rdfs:range xsd:string .
+
+
+###  http://example.org/book-recommendation/ontology#hasName
+ontology:hasName rdf:type owl:DatatypeProperty ;
+                 rdfs:domain ontology:Themes ,
+                             ontology:User ;
+                 rdfs:range xsd:string .
+
+
+###  http://example.org/book-recommendation/ontology#hasReadingLevel
+ontology:hasReadingLevel rdf:type owl:DatatypeProperty ;
+                         rdfs:domain ontology:Book ,
+                                     ontology:User ;
+                         rdfs:range xsd:string .
+
+
+###  http://example.org/book-recommendation/ontology#hasTitle
+ontology:hasTitle rdf:type owl:DatatypeProperty ;
+                  rdfs:domain ontology:Book ;
+                  rdfs:range xsd:string .
+
+
+#################################################################
+#    Classes
+#################################################################
+
+###  http://example.org/book-recommendation/ontology#Book
+ontology:Book rdf:type owl:Class ;
+              rdfs:subClassOf [ rdf:type owl:Restriction ;
+                                owl:onProperty ontology:hasGenre ;
+                                owl:someValuesFrom ontology:Themes
+                              ] .
+
+
+###  http://example.org/book-recommendation/ontology#Themes
+ontology:Themes rdf:type owl:Class .
+
+
+###  http://example.org/book-recommendation/ontology#User
+ontology:User rdf:type owl:Class ;
+              rdfs:subClassOf [ rdf:type owl:Restriction ;
+                                owl:onProperty ontology:hasPreferredTheme ;
+                                owl:someValuesFrom ontology:Themes
+                              ] .
+
+
+#################################################################
+#    Individuals
+#################################################################
+
+###  http://example.org/book-recommendation/ontology#Alice
+ontology:Alice rdf:type owl:NamedIndividual ,
+                        ontology:User ;
+               ontology:hasPreferredTheme ontology:ScienceFiction ;
+               ontology:hasName "Alice" ;
+               ontology:hasReadingLevel "Intermediate" .
+
+
+###  http://example.org/book-recommendation/ontology#Bob
+ontology:Bob rdf:type owl:NamedIndividual ,
+                      ontology:User ;
+             ontology:hasPreferredTheme ontology:Mystery ;
+             ontology:hasName "Bob" ;
+             ontology:hasReadingLevel "Beginner" .
+
+
+###  http://example.org/book-recommendation/ontology#Dune
+ontology:Dune rdf:type owl:NamedIndividual ,
+                       ontology:Book ;
+              ontology:hasGenre ontology:Fantasy ,
+                                ontology:ScienceFiction ;
+              ontology:hasAuthor "Frank Herbert" ;
+              ontology:hasName "Dune" ;
+              ontology:hasReadingLevel "Advanced" .
+
+
+###  http://example.org/book-recommendation/ontology#Fantasy
+ontology:Fantasy rdf:type owl:NamedIndividual ,
+                          ontology:Themes ;
+                 ontology:hasName "Fantasy" .
+
+
+###  http://example.org/book-recommendation/ontology#Hunger_Games
+ontology:Hunger_Games rdf:type owl:NamedIndividual ,
+                               ontology:Book ;
+                      ontology:hasGenre ontology:Fantasy ,
+                                        ontology:ScienceFiction ;
+                      ontology:hasAuthor "Suzanne Collins" ;
+                      ontology:hasReadingLevel "Beginner" ;
+                      ontology:hasTitle "Hunger Games" .
+
+
+###  http://example.org/book-recommendation/ontology#Murder
+ontology:Murder rdf:type owl:NamedIndividual ,
+                         ontology:Themes ;
+                ontology:hasName "Murder" .
+
+
+###  http://example.org/book-recommendation/ontology#Mystery
+ontology:Mystery rdf:type owl:NamedIndividual ,
+                          ontology:Themes ;
+                 ontology:hasName "Mystery" .
+
+
+###  http://example.org/book-recommendation/ontology#ScienceFiction
+ontology:ScienceFiction rdf:type owl:NamedIndividual ,
+                                 ontology:Themes ;
+                        ontology:hasName "Science Fiction" .
+
+
+###  http://example.org/book-recommendation/ontology#The_Silent_Patient
+ontology:The_Silent_Patient rdf:type owl:NamedIndividual ,
+                                     ontology:Book ;
+                            ontology:hasGenre ontology:Murder ,
+                                              ontology:Mystery ;
+                            ontology:hasAuthor "Alex Michaelides" ;
+                            ontology:hasReadingLevel "Intermediate" ;
+                            ontology:hasTitle "The Silent Patient" .
+
+
+#################################################################
+#    General axioms
+#################################################################
+
+[ owl:intersectionOf ( ontology:Book
+                       [ rdf:type owl:Restriction ;
+                         owl:onProperty ontology:hasGenre ;
+                         owl:someValuesFrom ontology:Themes
+                       ]
+                       [ rdf:type owl:Restriction ;
+                         owl:onProperty ontology:hasReadingLevel ;
+                         owl:someValuesFrom xsd:string
+                       ]
+                     ) ;
+  rdf:type owl:Class ;
+  rdfs:subClassOf ontology:Book
+] .
+
+
+###  Generated by the OWL API (version 4.5.29.2024-05-13T12:11:03Z) https://github.com/owlcs/owlapi
